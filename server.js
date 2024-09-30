@@ -1,23 +1,49 @@
+const fs = require('fs')
 const http = require('http')
 
-let requestCount = 0
+const delay = ms => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, ms)
+    })
+}
 
-const server = http.createServer((request, response) => {
-    requestCount++
+const readFile = path => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(path, (err, data) => {
+            if (err) reject(err)
+            else  resolve(data)
+        })
+    })
+}
 
+const server = http.createServer(async (request, response) => {
     switch (request.url) {
-        case '/students':
-            response.write('Students')
+        case '/home': {
+            try {
+                const data = await readFile('pages/home3.html')
+                response.write(data)
+                response.end()
+            } catch(err) {
+                response.write('some error')
+                response.end()
+            }
+
+
             break
-        case '/courses':
-            response.write('Front + Back')
+        }
+        case '/about': {
+            await delay(3000)
+            response.write('ABOUT COURSE')
+            response.end()
+
             break
+        }
         default:
             response.write('404 Not found')
+            response.end()
     }
-
-    response.write(' Request Count: ' + requestCount)
-    response.end()
 })
 
 server.listen(3003)
