@@ -1,0 +1,22 @@
+{
+  "name": "Back-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AndriyBats/back-end-course.git",
+  "author": "AndriyBats <84588992+AndriyBats@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc -w",
+    "dev": "nodemon ./dist/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.4",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
